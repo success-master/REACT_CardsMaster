@@ -1,8 +1,7 @@
 .Section {
 
     padding: 25px;
-
-    margin: 25px 0px;
+    margin: 1%;
     background-color: #FCFCFC;
     border: 1px solid #D9D9D9;
     border-radius: 5px;
@@ -59,7 +58,7 @@
 
         .sectionMenu {
             position: absolute;
-            right: 1% !important;
+            right: 0px !important;
         }
     }
 
@@ -72,5 +71,22 @@
 .unset-width {
     div.react-grid-item {
         max-width: 100% !important;
+        // transform: translate(0px, 10px) !important;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+
+    .unset-width {
+        div.react-grid-item {
+            width: 100% !important;
+            transform: translateX(0px) !important;
+            position: relative !important;
+            margin-top: 10px;
+        }
+    }
+
+    .react-grid-layout {
+        height: auto !important;
     }
 }

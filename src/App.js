@@ -1,6 +1,7 @@
 // require ('./lib/gridstack/gridstack.all')
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Post from './components/post';
 
@@ -24,7 +25,7 @@ function App() {
 
 
 	const [file, setFile] = useState();
-	const [preview, setPreview] = useState();
+	// const [preview, setPreview] = useState();
 
 
 	const saveSection = (e) => {
@@ -56,7 +57,7 @@ function App() {
 	}
 
 	const savePost = (e) => {
-		let reader = new FileReader();
+		// let reader = new FileReader();
 		let elem = {};
 		const formData = new FormData(e.target);
 		e.preventDefault();
@@ -106,7 +107,7 @@ function App() {
 		}
 	};
 
-	const savePos = (p, s, i, x, y) => {
+	const savePos = (p, s, i, x, y, layout, old) => {
 
 		/*
 
@@ -149,8 +150,6 @@ function App() {
 
 	const addNote = (s, p) => {
 
-		// GridStack.init();
-		// console.log('Hello');
 		let elem = {};
 		elem.type = 'note';
 		elem.edit = true;
@@ -243,7 +242,7 @@ function App() {
 
 	return (
 		<ContextApp.Provider value={{ saveList, saveNote, saveQA, saveSize, savePos }}>
-			<div className="App">
+			<div className="App container">
 				<button
 					onClick={() => setPostsFormVisible(true)}
 					className="post_btn"

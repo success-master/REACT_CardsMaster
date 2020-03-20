@@ -1,9 +1,10 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import './index.scss';
-import { Accordion, AccordionItem } from 'react-sanfona';
+// import { Accordion, AccordionItem } from 'react-sanfona';
 import { ContextApp } from '../../App';
 import ReactQuill from 'react-quill';
 import ReactResizeDetector from 'react-resize-detector';
+import { DropdownButton, Dropdown } from "react-bootstrap";
 
 
 const QA = (props) => {
@@ -38,7 +39,7 @@ const QA = (props) => {
 		setCurrentQAItems([...currentQAItems, ""]);
 	}
 
-	const [opened, setOpened] = useState(0);
+	// const [opened, setOpened] = useState(0);
 	return (
 		<div className="QA grid-stack-item-content">
 			<header className="QAHeader">
@@ -55,10 +56,11 @@ const QA = (props) => {
 						)
 					})}
 					{/* </Accordion> */}
-					<button onClick={props.copyCard}>copy</button>
-					<button onClick={() => props.editCard(props.p, props.s, props.num)}>edit</button>
-					<button onClick={() => props.deleteCard(props.p, props.s, props.num)}>delete</button>
-
+					<DropdownButton className="Qa-dropdown" id="dropdown-variants-secondary" drop="right" variant="secondary" size="sm" title="Actions">
+						<Dropdown.Item onClick={props.copyCard}>copy</Dropdown.Item>
+						<Dropdown.Item onClick={() => props.editCard(props.p, props.s, props.num)}>edit</Dropdown.Item>
+						<Dropdown.Item onClick={() => props.deleteCard(props.p, props.s, props.num)}>delete</Dropdown.Item>
+					</DropdownButton>
 				</div>
 
 				) : (

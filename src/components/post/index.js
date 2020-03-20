@@ -1,47 +1,97 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './index.scss';
 import Section from "../section/index";
-// import GridLayout from 'react-grid-layout';
+import { Button } from "react-bootstrap";
+import tasklistData from '../tasklist/tasklistData';
+import Tasklist from '../tasklist/tasklist';
+import RelatedList from '../relatedlist/relatedlist'
 
-const Post = (props) => {
+class Post extends React.Component {
 
-  const [file, setFile] = useState('');
-  const [preview, setPreview] = useState('');
+  // const [file, setFile] = useState('');
+  // const [preview, setPreview] = useState('');
+  constructor(props) {
 
-  return (
-    <div className="Post">
+    super(props);
 
-      <header className="Header">
-        {props.image_file && <img src={URL.createObjectURL(props.image_file)} />}
+    this.state = {
+      checkedItems: new Map(),
+    }
 
-        <div className="Text">
-          <h2>{props.title}</h2>
-          <h4>{props.desc}</h4>
-          {props.tags && (
-            <div className="tags">
-              {props.tags.split(',').map((item, index) => {
-                return <span key={index + '__li'}>{item}</span>;
-              })}
+    this.handleChange = this.handleChange.bind(this);
+
+  }
+  handleChange(e) {
+    const item = e.target.name;
+    const isChecked = e.target.checked;
+    this.setState(prevState => ({ checkedItems: prevState.checkedItems.set(item, isChecked) }));
+  }
+
+
+  render() {
+    return (
+      <div className="row">
+        <div className="Post col-md-8 col-sm-12">
+
+          <header className="Header">
+            {this.props.image_file && <img src={URL.createObjectURL(this.props.image_file)} />}
+
+            <div className="Text">
+              <h2>{this.props.title}</h2>
+              <h4>{this.props.desc}</h4>
+              {this.props.tags && (
+                <div className="tags">
+                  {this.props.tags.split(',').map((item, index) => {
+                    return <span key={index + '__li'}>{item}</span>;
+                  })}
+                </div>
+              )}
             </div>
-          )}
-        </div>
-        <div className="postMenu">
-          <button className="add_section_id" id="add_section_id"
-            onClick={() => props.addSection(props.num)}>+ section</button>
+            <div className="postMenu">
+              <Button
+                variant="secondary"
+                className="add_section_id"
+                id="add_section_id"
+                size="sm"
+                onClick={() => this.props.addSection(this.props.num)}
+              >+ section</Button>
+            </div>
+
+          </header>
+          <div className="Content">
+
+            {this.props.items.map((section, index) => {
+              return <Section key={index} image_file={section.image_file} num={index} tags={section.tags} postNum={this.props.num} editCard={this.props.editCard} pasteCard={this.props.pasteCard} copyCard={this.props.copyCard} deleteCard={this.props.deleteCard} addNote={this.props.addNote} addList={this.props.addList} addQA={this.props.addQA} title={section.title} desc={section.desc} items={section.items} />;
+            })}
+
+          </div>
 
         </div>
-
-      </header>
-      <div className="Content">
-
-        {props.items.map((section, index) => {
-          return <Section key={index} image_file={section.image_file} num={index} tags={section.tags} postNum={props.num} editCard={props.editCard} pasteCard={props.pasteCard} copyCard={props.copyCard} deleteCard={props.deleteCard} addNote={props.addNote} addList={props.addList} addQA={props.addQA} title={section.title} desc={section.desc} items={section.items} />;
-        })}
-
+        <div className="RightSide col-md-4 col-sm-12">
+          <div className="TaskList">
+            <h4 style={{ textAlign: "center", color: "#6c757d" }}>Task List</h4>
+            <React.Fragment>
+              {
+                tasklistData.map(item => (
+                  <div key={item.key} className="RightSideList">
+                    <label>
+                      <Tasklist name={item.name} checked={this.state.checkedItems.get(item.name)} onChange={this.handleChange} />
+                      {item.name}
+                    </label>
+                    <br />
+                  </div>
+                ))
+              }
+            </React.Fragment>
+          </div>
+          <div className="RelatedList">
+            <h4 style={{ textAlign: "center", color: "#6c757d" }}>Related List</h4>
+            <RelatedList />
+          </div>
+        </div>
       </div>
-
-    </div>
-  );
+    );
+  }
 }
 
 export default Post;

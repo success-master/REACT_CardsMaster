@@ -5,6 +5,7 @@ import ReactPlayer from 'react-player';
 import { ContextApp } from '../../App';
 import ReactQuill from 'react-quill';
 import ReactResizeDetector from 'react-resize-detector';
+import { DropdownButton, Dropdown } from "react-bootstrap";
 
 const Note = (props) => {
 	const { saveNote, saveSize } = useContext(ContextApp);
@@ -62,10 +63,11 @@ const Note = (props) => {
 							</div>
 						)}
 						{props.desc && <div className="NoteText" dangerouslySetInnerHTML={{ __html: props.desc }} />}
-						<button onClick={props.copyCard}>copy</button>
-						<button onClick={() => props.editCard(props.p, props.s, props.num)}>edit</button>
-						<button onClick={() => props.deleteCard(props.p, props.s, props.num)}>delete</button>
-
+						<DropdownButton className="note-dropdown" id="dropdown-variants-secondary" drop="right" variant="secondary" size="sm" title="Actions">
+							<Dropdown.Item onClick={props.copyCard}>copy</Dropdown.Item>
+							<Dropdown.Item onClick={() => props.editCard(props.p, props.s, props.num)}>edit</Dropdown.Item>
+							<Dropdown.Item onClick={() => props.deleteCard(props.p, props.s, props.num)}>delete</Dropdown.Item>
+						</DropdownButton>
 					</div>
 				) : (
 						<div className="NoteForm">
@@ -79,14 +81,14 @@ const Note = (props) => {
 									<input type="text" name="tags" ref={tagsInput} />
 									<label>Desc</label>
 									<div>
-										<ReactQuill value={richText} onChange={(value) => setRichText(value)} />
+										<ReactQuill value={richText} onChange={(value) => setRichText(value)} />										
 									</div>
 									<button type="submit">Create Note</button>
 								</form>
 							</div>
 						</div>
 					)}
-				<ReactResizeDetector handleWidth handleHeight onResize={onResize} />
+				<ReactResizeDetector className="Resize-detector" handleWidth handleHeight onResize={onResize} />
 			</div>
 		</div>
 	);
