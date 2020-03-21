@@ -153,8 +153,8 @@ function App() {
 		let elem = {};
 		elem.type = 'note';
 		elem.edit = true;
-		elem.h = 150;
-		elem.w = 150;
+		elem.w = 200;
+		elem.h = 100;
 		elem.title = '';
 		let posts_cloned = postsList;
 		posts_cloned[p].items[s].items.push(elem);
@@ -170,8 +170,8 @@ function App() {
 		elem.edit = true;
 		elem.title = '';
 		elem.items = [];
-		elem.w = 120;
-		elem.h = 80;
+		elem.w = 150;
+		elem.h = 100;
 
 		let posts_cloned = postsList;
 		posts_cloned[p].items[s].items.push(elem);
@@ -204,8 +204,8 @@ function App() {
 		let elem = {};
 		elem.type = 'qa';
 		elem.edit = true;
-		elem.w = 80;
-		elem.h = 50;
+		elem.w = 150;
+		elem.h = 100;
 		elem.title = '';
 		let posts_cloned = postsList;
 		posts_cloned[p].items[s].items.push(elem);
@@ -218,7 +218,7 @@ function App() {
 		setSectionsFormVisible(true);
 	};
 
-	const saveQA = (e, currentQAItems, p, s, i) => {
+	const saveQA = (e, currentQAItems, p, s, i) => {		
 		let elem = {};
 		const formData = new FormData(e.target);
 		e.preventDefault();
@@ -237,6 +237,7 @@ function App() {
 
 		posts_cloned[p].items[s].items[i] = elem;
 
+		console.log('save list:', posts_cloned[p].items[s].items[i]);
 		setPosts([...posts_cloned]);
 	};
 

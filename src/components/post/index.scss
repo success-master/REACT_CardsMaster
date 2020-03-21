@@ -15,7 +15,8 @@
     .Header {
 
         height: 120px;
-        background-color: #e2f8ff;
+        // background-color: #e2f8ff;
+        background-color: #cacecf;
         display: flex;
         padding: 0px 50px 0px 0px;
         align-items: center;
@@ -41,7 +42,7 @@
             }
 
             .tags {
-                margin-top: 15px;
+                margin-top: 3px;
 
                 span {
                     border-radius: 5px;
@@ -49,10 +50,12 @@
                     -moz-border-radius: 5px;
                     -ms-border-radius: 5px;
                     -o-border-radius: 5px;
-                    background-color: #fdf4fd;
+                    // background-color: #fdf4fd;
+                    background-color: #ccefd0;
                     color: #7f7f7f;
                     font-size: 10px;
                     padding: 10px;
+                    // padding-bottom: 5px !important;
                     margin: 6px 6px 6px 0px;
                 }
             }

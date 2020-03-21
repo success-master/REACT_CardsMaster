@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './index.scss';
 import GridLayout from 'react-grid-layout';
 import { WidthProvider } from "react-grid-layout";
@@ -6,16 +6,18 @@ import { WidthProvider } from "react-grid-layout";
 
 import Note from '../note/index'
 import List from '../list/index'
-import QA from '../qa';
+import QA from '../qa/index';
 
 import { ContextApp } from '../../App';
 import '../../../node_modules/react-grid-layout/css/styles.css'
 import '../../../node_modules/react-resizable/css/styles.css'
 import { DropdownButton, Dropdown } from "react-bootstrap";
+import ListItemEditModal from '../modal/listItemEditModal';
 
 const ReactGridLayout = WidthProvider(GridLayout);
 
 const Section = (props) => {
+
   const { saveSize, savePos } = useContext(ContextApp);
   const layoutGenerator = () => {
     let layouts = [];
@@ -25,14 +27,27 @@ const Section = (props) => {
     return layouts;
   }
 
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const [list_item, setList_Item] = useState(null);
+
+  const handleShow = (list_item) => {
+    setModalOpen(true);
+    console.log(list_item);
+
+  }
+  const handleClose = () => {
+    setModalOpen(false);
+  }
+
+
   return (
     <div className="Section">
-
       <header className="Header">
         {props.image_file && <img src={URL.createObjectURL(props.image_file)} />}
         <div className="Text">
-          <h2>{props.title}</h2>
-          <h4>{props.desc}</h4>
+          <h4>{props.title}</h4>
+          <h6>{props.desc}</h6>
           {props.tags && (
             <div className="tags">
               {props.tags.split(',').map((item, index) => {
@@ -64,7 +79,7 @@ const Section = (props) => {
           {props.items.map((item, index) => {
 
             if (item.type === "note") return (<div key={index} ><Note num={index} p={props.postNum} s={props.num} title={item.title} edit={item.edit} copyCard={() => props.copyCard(item)} deleteCard={props.deleteCard} editCard={props.editCard} url={item.url} desc={item.desc} tags={item.tags} /></div>)
-            if (item.type === "list") return (<div key={index} ><List num={index} p={props.postNum} s={props.num} title={item.title} edit={item.edit} copyCard={() => props.copyCard(item)} deleteCard={props.deleteCard} editCard={props.editCard} items={item.items} /></div>)
+            if (item.type === "list") return (<div key={index} ><List num={index} p={props.postNum} s={props.num} title={item.title} edit={item.edit} copyCard={() => props.copyCard(item)} deleteCard={props.deleteCard} editCard={props.editCard} items={item.items} handleShow={(title) => handleShow(title)} /></div>)
             if (item.type === "qa") return (<div key={index} ><QA num={index} p={props.postNum} s={props.num} title={item.title} edit={item.edit} copyCard={() => props.copyCard(item)} deleteCard={props.deleteCard} editCard={props.editCard} items={item.items} /></div>)
           })
           }
@@ -73,7 +88,7 @@ const Section = (props) => {
 
         <button style={{ marginTop: "10px" }} onClick={() => props.pasteCard(props.postNum, props.num)}>paste</button>
       </div>
-
+      <ListItemEditModal modalOpen={modalOpen} handleClose={() => handleClose()} />
     </div>
   );
 }

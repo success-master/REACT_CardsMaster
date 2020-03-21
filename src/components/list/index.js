@@ -3,10 +3,16 @@ import './index.scss';
 import SortableList from 'react-sortable-dnd-list';
 import { ContextApp } from '../../App';
 import ReactResizeDetector from 'react-resize-detector';
-import { DropdownButton, Dropdown } from "react-bootstrap";
+import { DropdownButton, Dropdown, ButtonGroup, Button } from "react-bootstrap";
 import { TextArea } from 'semantic-ui-react';
 
 const List = (props) => {
+
+	const { handleShow } = props;
+
+	const handleDelete = () => {
+		console.log('handledelete function');
+	}
 
 	useEffect(() => {
 		if (props.edit === true) {
@@ -32,7 +38,6 @@ const List = (props) => {
 
 	const addListLine = (e, listItemInput) => {
 		e.preventDefault();
-		console.log('list card textarea:', listItemInput.current.ref.current.value);
 		// if (listItemInput.current.value.length > 0) {
 		// 	setListItems([...listItems, { title: listItemInput.current.value }]);
 
@@ -45,6 +50,10 @@ const List = (props) => {
 		}
 	}
 
+	// const handlechange = (title) => {
+	// 	handleShow(title);
+	// }
+
 	return (
 		<div className="List grid-stack-item-content">
 
@@ -55,12 +64,17 @@ const List = (props) => {
 				{!props.edit ? (<div className="ListContent">
 					<ul>
 						{props.items.map((item, index) => {
-							return <li key={index}>{item.title}</li>
+							return <li key={index}>{item.title}
+								<ButtonGroup style={{ position: "absolute", right: "0px" }} aria-label="Basic example">
+									<Button variant="link" style={{ padding: "0" }} onClick={handleShow}>Edit</Button>
+									<Button variant="link" style={{ color: "red" }} onClick={handleDelete}>Delete</Button>
+								</ButtonGroup>
+							</li>
 						})}
 					</ul>
 					<DropdownButton className="List-dropdown" id="dropdown-variants-secondary" drop="right" variant="secondary" size="sm" title="Actions">
 						<Dropdown.Item onClick={props.copyCard}>copy</Dropdown.Item>
-						<Dropdown.Item onClick={() => props.editCard(props.p, props.s, props.num)}>edit</Dropdown.Item>
+						<Dropdown.Item onClick={() => props.editCard(props.p, props.s, props.num)}>addlist</Dropdown.Item>
 						<Dropdown.Item onClick={() => props.deleteCard(props.p, props.s, props.num)}>delete</Dropdown.Item>
 					</DropdownButton>
 				</div>
@@ -71,10 +85,9 @@ const List = (props) => {
 								<form className="container" onSubmit={(e) => { saveList(e, listItems, props.p, props.s, props.num); }}>
 									<label>Title</label>
 									<input type="text" name="title" ref={titleInput} />
-									<div className="row enterLineHolder">
-										{/* <input type="text" className="col-8" name="item" ref={listItemInput} /> */}
-										<TextArea className="col-md-10 col-sm-12" name="item" ref={listItemInput} />
-										<button className="col-md-2 col-sm-12" onClick={(e) => addListLine(e, listItemInput)}>Add</button>
+									<div className="enterLineHolder">
+										<TextArea className="col-12 col-md-12 col-sm-12 col-xs-12" style={{ padding: "0" }} name="item" ref={listItemInput} />
+										<button className="col-12 col-md-12 col-sm-12 col-xs-12" onClick={(e) => addListLine(e, listItemInput)}>Add</button>
 									</div>
 									<SortableList
 										className="list"

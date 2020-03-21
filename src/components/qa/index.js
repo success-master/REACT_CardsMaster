@@ -34,6 +34,10 @@ const QA = (props) => {
 		setCurrentQAItems(items);
 	}
 
+	const editAnswerTitle = (e) => {
+
+	}
+
 	const addCurrentQAItem = (e) => {
 		e.preventDefault();
 		setCurrentQAItems([...currentQAItems, ""]);
@@ -50,6 +54,7 @@ const QA = (props) => {
 					{/* <Accordion> */}
 					{props.items.map((item, index) => {
 						return (
+
 							<div key={index + "_a"}>
 								<div className="QAText" dangerouslySetInnerHTML={{ __html: item }} />
 							</div>
@@ -58,7 +63,7 @@ const QA = (props) => {
 					{/* </Accordion> */}
 					<DropdownButton className="Qa-dropdown" id="dropdown-variants-secondary" drop="right" variant="secondary" size="sm" title="Actions">
 						<Dropdown.Item onClick={props.copyCard}>copy</Dropdown.Item>
-						<Dropdown.Item onClick={() => props.editCard(props.p, props.s, props.num)}>edit</Dropdown.Item>
+						<Dropdown.Item onClick={() => props.editCard(props.p, props.s, props.num)}>add/ edit</Dropdown.Item>
 						<Dropdown.Item onClick={() => props.deleteCard(props.p, props.s, props.num)}>delete</Dropdown.Item>
 					</DropdownButton>
 				</div>
@@ -74,9 +79,16 @@ const QA = (props) => {
 									<label>Answer</label>
 
 									<div>
-										{currentQAItems.map((item, index) => <ReactQuill key={index + "_a"} value={item} onChange={(value) => editCurrentQAItem(index, value)} />)}
+										{currentQAItems.map((item, index) =>
+											<div>
+												<label>Title</label>
+												<input key={index + "_a"} onChange={editAnswerTitle} className="w-100" type="text" name="answer_title" placeholder="Answer Title"></input>
+												<ReactQuill key={index + "_a"} value={item} onChange={(value) => editCurrentQAItem(index, value)} />
+											</div>
+										)}
 
-									</div><button onClick={addCurrentQAItem}>+add answer</button>
+									</div>
+									<button onClick={addCurrentQAItem}>+add answer</button>
 									<button type="submit">Save</button>
 								</form>
 							</div>
