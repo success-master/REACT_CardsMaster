@@ -27,18 +27,17 @@ const Section = (props) => {
     return layouts;
   }
 
-  const [modalOpen, setModalOpen] = useState(false);
+  // const [modalOpen, setModalOpen] = useState(false);
 
-  const [list_item, setList_Item] = useState(null);
+  // const [list_item, setList_Item] = useState(null);
 
-  const handleShow = (list_item) => {
-    setModalOpen(true);
-    console.log(list_item);
-
-  }
-  const handleClose = () => {
-    setModalOpen(false);
-  }
+  // const handleShow = (list_item) => {
+  //   setModalOpen(true);
+  //   console.log(list_item);
+  // }
+  // const handleClose = () => {
+  //   setModalOpen(false);
+  // }
 
 
   return (
@@ -79,7 +78,7 @@ const Section = (props) => {
           {props.items.map((item, index) => {
 
             if (item.type === "note") return (<div key={index} ><Note num={index} p={props.postNum} s={props.num} title={item.title} edit={item.edit} copyCard={() => props.copyCard(item)} deleteCard={props.deleteCard} editCard={props.editCard} url={item.url} desc={item.desc} tags={item.tags} /></div>)
-            if (item.type === "list") return (<div key={index} ><List num={index} p={props.postNum} s={props.num} title={item.title} edit={item.edit} copyCard={() => props.copyCard(item)} deleteCard={props.deleteCard} editCard={props.editCard} items={item.items} handleShow={(title) => handleShow(title)} /></div>)
+            if (item.type === "list") return (<div key={index} ><List num={index} p={props.postNum} s={props.num} title={item.title} edit={item.edit} copyCard={() => props.copyCard(item)} deleteCard={props.deleteCard} editCard={props.editCard} items={item.items} /></div>)
             if (item.type === "qa") return (<div key={index} ><QA num={index} p={props.postNum} s={props.num} title={item.title} edit={item.edit} copyCard={() => props.copyCard(item)} deleteCard={props.deleteCard} editCard={props.editCard} items={item.items} /></div>)
           })
           }
@@ -88,7 +87,7 @@ const Section = (props) => {
 
         <button style={{ marginTop: "10px" }} onClick={() => props.pasteCard(props.postNum, props.num)}>paste</button>
       </div>
-      <ListItemEditModal modalOpen={modalOpen} handleClose={() => handleClose()} />
+      <ListItemEditModal p={props.postNum} s={props.num} />
     </div>
   );
 }

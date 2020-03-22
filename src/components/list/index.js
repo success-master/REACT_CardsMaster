@@ -5,20 +5,26 @@ import { ContextApp } from '../../App';
 import ReactResizeDetector from 'react-resize-detector';
 import { DropdownButton, Dropdown, ButtonGroup, Button } from "react-bootstrap";
 import { TextArea } from 'semantic-ui-react';
+import { useDispatch, connect } from 'react-redux';
+import * as Actions from '../../action';
 
 const List = (props) => {
 
-	const { handleShow } = props;
+	const { list_edit_item, list_modal_show, list_save_item, list_edit_item_modal } = props;
 
 	const handleDelete = () => {
 		console.log('handledelete function');
 	}
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (props.edit === true) {
 			titleInput.current.value = props.title;
 			if (props.items) setListItems(props.items);
 		}
+		dispatch(Actions.setListEditItem(props.items));
+		console.log('list items:', list_edit_item);
 
 	}, [props.edit, props.title]);
 
@@ -28,7 +34,10 @@ const List = (props) => {
 	const { saveList, saveSize } = useContext(ContextApp);
 	const container = useRef();
 
-
+	const handleShow = (item, index) => {
+		dispatch(Actions.setListModalShow(true));
+		dispatch(Actions.setListEditItemIndex(item, index));
+	}
 
 	const onResize = (w, h) => {
 
@@ -50,10 +59,6 @@ const List = (props) => {
 		}
 	}
 
-	// const handlechange = (title) => {
-	// 	handleShow(title);
-	// }
-
 	return (
 		<div className="List grid-stack-item-content">
 
@@ -63,10 +68,12 @@ const List = (props) => {
 			<div ref={container} >
 				{!props.edit ? (<div className="ListContent">
 					<ul>
-						{props.items.map((item, index) => {
-							return <li key={index}>{item.title}
+						{list_edit_item.map((item, index) => {
+							console.log('list items:', list_edit_item);
+							return <li key={index}>{list_edit_item_modal.index == index ? list_edit_item_modal.content : item.title}
+							{console.log('list item edit modal:', index, list_edit_item_modal.index)}
 								<ButtonGroup style={{ position: "absolute", right: "0px" }} aria-label="Basic example">
-									<Button variant="link" style={{ padding: "0" }} onClick={handleShow}>Edit</Button>
+									<Button variant="link" style={{ padding: "0" }} onClick={() => handleShow(item.title, index)}>Edit</Button>
 									<Button variant="link" style={{ color: "red" }} onClick={handleDelete}>Delete</Button>
 								</ButtonGroup>
 							</li>
@@ -128,4 +135,15 @@ function ItemComponent({
 	)
 }
 
-export default List;
+// export default List;
+
+const mapStateToProps = state => {
+	return {
+		list_edit_item: state.list_edit_item,
+		list_modal_show: state.list_modal_show,
+		list_edit_item_modal: state.list_edit_item_modal,
+		list_save_item: state.list_save_item,
+	};
+};
+
+export default connect(mapStateToProps, null)(List);

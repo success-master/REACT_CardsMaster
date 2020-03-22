@@ -80,10 +80,10 @@ const QA = (props) => {
 
 									<div>
 										{currentQAItems.map((item, index) =>
-											<div>
+											<div key={index + "_a"}>
 												<label>Title</label>
-												<input key={index + "_a"} onChange={editAnswerTitle} className="w-100" type="text" name="answer_title" placeholder="Answer Title"></input>
-												<ReactQuill key={index + "_a"} value={item} onChange={(value) => editCurrentQAItem(index, value)} />
+												<input className="w-100" type="text" name="answer_title" placeholder="Answer Title"></input>
+												<ReactQuill value={item} onChange={(value) => editCurrentQAItem(index, value)} />
 											</div>
 										)}
 
