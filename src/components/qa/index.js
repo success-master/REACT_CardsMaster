@@ -56,7 +56,7 @@ const QA = (props) => {
 						return (
 
 							<div key={index + "_a"}>
-								<div className="QAText" dangerouslySetInnerHTML={{ __html: item }} />
+								<div className="QAText" style={{ overflowWrap: "break-word" }} dangerouslySetInnerHTML={{ __html: item }} />{item.length ? <hr /> : null}
 							</div>
 						)
 					})}
@@ -86,7 +86,6 @@ const QA = (props) => {
 												<ReactQuill value={item} onChange={(value) => editCurrentQAItem(index, value)} />
 											</div>
 										)}
-
 									</div>
 									<button onClick={addCurrentQAItem}>+add answer</button>
 									<button type="submit">Save</button>
