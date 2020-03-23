@@ -47,7 +47,7 @@ const QA = (props) => {
 	return (
 		<div className="QA grid-stack-item-content">
 			<header className="QAHeader">
-				<h4>{props.edit ? (props.title.length > 0 ? 'Edit QA' : 'Add QA') : props.title}</h4>
+				<h6>{props.edit ? (props.title.length > 0 ? 'Edit QA' : 'Add QA') : props.title}</h6>
 			</header>
 			<div ref={container} >
 				{!props.edit ? (<div className="QAContent">

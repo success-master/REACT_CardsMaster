@@ -63,7 +63,7 @@ const List = (props) => {
 		<div className="List grid-stack-item-content">
 
 			<header className="ListHeader">
-				<h4>{props.edit ? (props.title.length > 0 ? 'Edit list' : 'Add List') : props.title}</h4>
+				<h6>{props.edit ? (props.title.length > 0 ? 'Edit list' : 'Add List') : props.title}</h6>
 			</header>
 			<div ref={container} >
 				{!props.edit ? (<div className="ListContent">

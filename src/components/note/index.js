@@ -36,7 +36,7 @@ const Note = (props) => {
 	return (
 		<div className="Note grid-stack-item-content">
 			<header className="NoteHeader">
-				<h4>{props.edit ? (props.title.length > 0 ? 'Edit Note' : 'Add Note') : props.title}</h4>
+				<h6>{props.edit ? (props.title.length > 0 ? 'Edit Note' : 'Add Note') : props.title}</h6>
 			</header>
 			<div ref={container}>
 				{!props.edit ? (
@@ -62,7 +62,7 @@ const Note = (props) => {
 								})}
 							</div>
 						)}
-						{props.desc && <div className="NoteText" dangerouslySetInnerHTML={{ __html: props.desc }} />}
+						{props.desc && <div className="NoteText" style={{ overflowWrap: "break-word" }} dangerouslySetInnerHTML={{ __html: props.desc }} />}
 						<DropdownButton className="note-dropdown" id="dropdown-variants-secondary" drop="right" variant="secondary" size="sm" title="Actions">
 							<Dropdown.Item onClick={props.copyCard}>copy</Dropdown.Item>
 							<Dropdown.Item onClick={() => props.editCard(props.p, props.s, props.num)}>edit</Dropdown.Item>
@@ -81,7 +81,7 @@ const Note = (props) => {
 									<input type="text" name="tags" ref={tagsInput} />
 									<label>Desc</label>
 									<div>
-										<ReactQuill value={richText} onChange={(value) => setRichText(value)} />										
+										<ReactQuill value={richText} onChange={(value) => setRichText(value)} />
 									</div>
 									<button type="submit">Create Note</button>
 								</form>

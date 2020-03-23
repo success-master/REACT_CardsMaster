@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from "react-bootstrap";
-import { Input } from "reactstrap";
+import { TextArea } from 'semantic-ui-react';
+// import { Input } from "reactstrap";
 import { useDispatch, connect } from 'react-redux';
 import * as Actions from '../../action';
 
@@ -30,7 +31,8 @@ const Listitemeditmodal = (props) => {
                 <Modal.Title>Edit List Item</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Input type="text" defaultValue={set_list_edit_item_index.content} onChange={handleChange} />
+                {/* <Input type="text" defaultValue={set_list_edit_item_index.content} onChange={handleChange} /> */}
+                <TextArea className="w-100" defaultValue={set_list_edit_item_index.content} onChange={handleChange} />
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="primary" onClick={() => savaChange(set_list_edit_item_index.index)}>
