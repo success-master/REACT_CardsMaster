@@ -31,7 +31,7 @@ class Post extends React.Component {
   render() {
     return (
       <div className="row">
-        <div className="Post col-md-8 col-sm-12">
+        <div className="Post col-md-9 col-sm-12">
 
           <header className="Header">
             {this.props.image_file && <img src={URL.createObjectURL(this.props.image_file)} />}
@@ -67,7 +67,7 @@ class Post extends React.Component {
           </div>
 
         </div>
-        <div className="RightSide col-md-4 col-sm-12">
+        <div className="RightSide col-md-3 col-sm-12">
           <div className="TaskList">
             <h4 style={{ textAlign: "center", color: "#6c757d" }}>Task List</h4>
             <React.Fragment>

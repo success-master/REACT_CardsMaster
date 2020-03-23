@@ -153,7 +153,7 @@ function App() {
 		let elem = {};
 		elem.type = 'note';
 		elem.edit = true;
-		elem.w = 200;
+		elem.w = 150;
 		elem.h = 100;
 		elem.title = '';
 		let posts_cloned = postsList;
