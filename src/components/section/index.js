@@ -45,7 +45,7 @@ const Section = (props) => {
       <header className="Header">
         {props.image_file && <img src={URL.createObjectURL(props.image_file)} />}
         <div className="Text">
-          <h4>{props.title}</h4>
+          <h5>{props.title}</h5>
           <h6>{props.desc}</h6>
           {props.tags && (
             <div className="tags">

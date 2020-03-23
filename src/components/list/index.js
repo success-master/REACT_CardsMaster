@@ -73,8 +73,8 @@ const List = (props) => {
 							return <li key={index}>{list_edit_item_modal.index == index ? list_edit_item_modal.content : item.title}
 							{console.log('list item edit modal:', index, list_edit_item_modal.index)}
 								<ButtonGroup style={{ position: "absolute", right: "0px" }} aria-label="Basic example">
-									<Button variant="link" style={{ padding: "0" }} onClick={() => handleShow(item.title, index)}>Edit</Button>
-									<Button variant="link" style={{ color: "red" }} onClick={handleDelete}>Delete</Button>
+									<Button variant="link" style={{ padding: "0" }} onClick={() => handleShow(item.title, index)}>E</Button>
+									<Button variant="link" style={{ color: "red" }} onClick={handleDelete}>X</Button>
 								</ButtonGroup>
 							</li>
 						})}

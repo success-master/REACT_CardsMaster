@@ -37,8 +37,8 @@ class Post extends React.Component {
             {this.props.image_file && <img src={URL.createObjectURL(this.props.image_file)} />}
 
             <div className="Text">
-              <h2>{this.props.title}</h2>
-              <h4>{this.props.desc}</h4>
+              <h4>{this.props.title}</h4>
+              <h6>{this.props.desc}</h6>
               {this.props.tags && (
                 <div className="tags">
                   {this.props.tags.split(',').map((item, index) => {
