@@ -153,8 +153,8 @@ function App() {
 		let elem = {};
 		elem.type = 'note';
 		elem.edit = true;
-		elem.w = 150;
-		elem.h = 100;
+		elem.w = 80;
+		elem.h = 80;
 		elem.title = '';
 		let posts_cloned = postsList;
 		posts_cloned[p].items[s].items.push(elem);
@@ -170,8 +170,8 @@ function App() {
 		elem.edit = true;
 		elem.title = '';
 		elem.items = [];
-		elem.w = 150;
-		elem.h = 100;
+		elem.w = 80;
+		elem.h = 80;
 
 		let posts_cloned = postsList;
 		posts_cloned[p].items[s].items.push(elem);
@@ -204,8 +204,8 @@ function App() {
 		let elem = {};
 		elem.type = 'qa';
 		elem.edit = true;
-		elem.w = 150;
-		elem.h = 100;
+		elem.w = 80;
+		elem.h = 80;
 		elem.title = '';
 		let posts_cloned = postsList;
 		posts_cloned[p].items[s].items.push(elem);
