@@ -6,7 +6,7 @@ import ReactResizeDetector from 'react-resize-detector';
 import { DropdownButton, Dropdown, ButtonGroup, Button } from "react-bootstrap";
 import { TextArea } from 'semantic-ui-react';
 import { useDispatch, connect } from 'react-redux';
-import * as Actions from '../../action';
+import * as Actions from '../../service/action';
 
 const List = (props) => {
 

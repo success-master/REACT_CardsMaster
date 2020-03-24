@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import Reducer from './store/reducer';
+import Reducer from './service/store/reducer';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 // import { watchAgeUp } from "./sagas/saga";

@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import { TextArea } from 'semantic-ui-react';
 // import { Input } from "reactstrap";
 import { useDispatch, connect } from 'react-redux';
-import * as Actions from '../../action';
+import * as Actions from '../../service/action';
 
 const Listitemeditmodal = (props) => {
 

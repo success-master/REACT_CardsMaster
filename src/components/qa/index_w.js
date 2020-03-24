@@ -8,7 +8,9 @@ import { DropdownButton, Dropdown } from "react-bootstrap";
 
 
 const QA = (props) => {
-	const [currentQAItems, setCurrentQAItems] = useState([{}]);
+	const [currentQAItems, setCurrentQAItems] = useState([]);
+	const [currentQATitle, setCurrentQATitle] = useState('');
+	const [currentAnswer, setCurrentAnswer] = useState('');
 	const { saveQA, saveSize } = useContext(ContextApp);
 	const container = useRef();
 	const titleInput = useRef(null);
@@ -17,7 +19,6 @@ const QA = (props) => {
 		if (props.edit === true) {
 			titleInput.current.value = props.title;
 			if (props.items) setCurrentQAItems(props.items);
-			// console.log('hello initial:', currentQAItems);
 		}
 
 	}, [props.edit, props.title])
@@ -28,30 +29,42 @@ const QA = (props) => {
 		saveSize(props.p, props.s, props.num, container.current.clientHeight, null);
 
 	};
-	// console.log('hello update', currentQAItems);
 
-	const editCurrentQAItem = (n, item) => {
-		// let items = currentQAItems;
-		// items[n] = item;
-		// setCurrentQAItems({type: 'anwer1', value: 'anwer'})
+	const editCurrentQAItem = (n, answer, title) => {
+		let items = currentQAItems;
+		// items[n] = answer;
+		setCurrentAnswer(answer);
+		let element = {
+			title: '',
+			answer: ''
+		};
+		if (currentAnswer && currentAnswer.length) element = {
+			title: title,
+			answer: currentAnswer
+		}
+
+		if (currentQATitle && currentQATitle.length) element = {
+			title: currentQATitle,
+			answer: answer
+		}
+
+		items[n] = element;
+		console.log(items[n]);
+
+		// console.log("this is answer", answer)
 		// setCurrentQAItems(items);
-		const updatedQAs = [...currentQAItems].map((qa, index) => index === n ? { ...qa, value: item } : qa);
-		setCurrentQAItems(updatedQAs);
 	}
 
-	const editAnswerTitle = (e) => {
-
+	const editAnswerTitle = (index, e) => {
+		setCurrentQATitle(e.target.value);
+		editCurrentQAItem(index, null, e.target.value);
+		console.log('edit answer title:', currentQATitle);
 	}
 
 	const addCurrentQAItem = (e) => {
 		e.preventDefault();
 		setCurrentQAItems([...currentQAItems, ""]);
 	}
-
-	const setType = (e, index) => {
-		const updatedQAs = [...currentQAItems].map((qa, i) => i === index ? { ...qa, type: e.target.value } : qa);
-		setCurrentQAItems(updatedQAs);
-	};
 
 	// const [opened, setOpened] = useState(0);
 	return (
@@ -63,12 +76,10 @@ const QA = (props) => {
 				{!props.edit ? (<div className="QAContent">
 					{/* <Accordion> */}
 					{props.items.map((item, index) => {
-						// console.log('display:', item);
 						return (
 
 							<div key={index + "_a"}>
-								<div className="QAText" style={{ overflowWrap: "break-word" }} dangerouslySetInnerHTML={{ __html: item.type }} />
-								<div className="QAText" style={{ overflowWrap: "break-word" }} dangerouslySetInnerHTML={{ __html: item.value }} />{item.value.length ? <hr /> : null}
+								<div className="QAText" style={{ overflowWrap: "break-word" }} dangerouslySetInnerHTML={{ __html: item }} />{item.length ? <hr /> : null}
 							</div>
 						)
 					})}
@@ -88,11 +99,11 @@ const QA = (props) => {
 
 									<label>Answer</label>
 									<div>
-										{currentQAItems.map(({ type = '', value = '' }, index) =>
+										{currentQAItems.map((item, index) =>
 											<div key={index + "_a"}>
 												<label>Title</label>
-												<input className="w-100" value={type} onChange={(e) => setType(e, index)} type="text" name="answer_title" placeholder="Answer Title"></input>
-												<ReactQuill value={value} onChange={(value) => editCurrentQAItem(index, value)} />
+												<input className="w-100" type="text" placeholder="Answer Title" onChange={(e) => editAnswerTitle(index, e)}></input>
+												<ReactQuill value={item} onChange={(value) => editCurrentQAItem(index, value, null)} />
 											</div>
 										)}
 									</div>

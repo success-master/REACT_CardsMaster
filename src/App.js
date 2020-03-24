@@ -134,6 +134,7 @@ function App() {
 	};
 
 	const deleteCard = (p, s, i) => {
+		console.log('delete card:', p, s, i);
 		let posts_cloned = postsList;
 		posts_cloned[p].items[s].items.splice(i, 1);
 
@@ -218,7 +219,7 @@ function App() {
 		setSectionsFormVisible(true);
 	};
 
-	const saveQA = (e, currentQAItems, p, s, i) => {		
+	const saveQA = (e, currentQAItems, p, s, i) => {
 		let elem = {};
 		const formData = new FormData(e.target);
 		e.preventDefault();
@@ -237,7 +238,7 @@ function App() {
 
 		posts_cloned[p].items[s].items[i] = elem;
 
-		console.log('save list:', posts_cloned[p].items[s].items[i]);
+		// console.log('save list:', posts_cloned[p].items[s].items[i]);
 		setPosts([...posts_cloned]);
 	};
 
