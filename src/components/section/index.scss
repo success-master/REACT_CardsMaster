@@ -12,11 +12,11 @@
 
     .Header {
 
-        height: 120px;
         // background-color: #e2f8ff;
         // background-color: #cacecf;
+        // height: 120px;
+        // padding: 0px 50px 0px 0px;
         display: flex;
-        padding: 0px 50px 0px 0px;
         align-items: center;
         justify-content: flex-start;
         border-radius: 5px !important;
@@ -26,8 +26,14 @@
         -ms-border-radius: 5px;
         -o-border-radius: 5px;
 
+        .SectionImg {
+            // height: 100%;
+            height: 150px;
+        }
+
         .Text {
             height: fit-content;
+            padding-left: 1%;
 
             h2,
             h4 {
@@ -91,5 +97,19 @@
 
     .react-grid-layout {
         height: auto !important;
+    }
+
+    .Section .Header {
+        display: block !important;
+    }
+
+    .Section .Header .SectionImg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .Section .Header .sectionMenu {
+        position: relative !important;
     }
 }

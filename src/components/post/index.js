@@ -34,8 +34,9 @@ class Post extends React.Component {
         <div className="Post col-md-9 col-sm-12">
 
           <header className="Header">
-            {this.props.image_file && <img src={URL.createObjectURL(this.props.image_file)} />}
-
+            {this.props.image_file && <div className="PostImg">
+              <img src={URL.createObjectURL(this.props.image_file)} />
+            </div>}
             <div className="Text">
               <h4>{this.props.title}</h4>
               <h6>{this.props.desc}</h6>

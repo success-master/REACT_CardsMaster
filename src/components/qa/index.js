@@ -67,7 +67,7 @@ const QA = (props) => {
 						return (
 
 							<div key={index + "_a"}>
-								<div className="QAText" style={{ overflowWrap: "break-word" }} dangerouslySetInnerHTML={{ __html: item.type }} />
+								<div className="QAText" style={{ overflowWrap: "break-word", fontWeight: "bold" }} dangerouslySetInnerHTML={{ __html: item.type }} />
 								<div className="QAText" style={{ overflowWrap: "break-word" }} dangerouslySetInnerHTML={{ __html: item.value }} />{item.value.length ? <hr /> : null}
 							</div>
 						)
